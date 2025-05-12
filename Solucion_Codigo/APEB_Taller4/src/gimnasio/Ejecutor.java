@@ -23,13 +23,25 @@ public class Ejecutor {
 
             boolean rutinaCompletada = cumplio.equalsIgnoreCase("si");
             Cliente cliente = new Cliente(nombre, tipoEjercicio, duracion, rutinaCompletada);
-            gimnasio.registrarCliente(cliente);
+            if (gimnasio.registrarCliente(cliente)) {
+                System.out.println("Cliente registrado exitosamente.");
+            } else {
+                System.out.println("No hay más espacio para nuevos clientes.");
+            }
 
             System.out.print("\n¿Desea registrar otro cliente? (si/no): ");
             continuar = tcl.nextLine();
 
         } while (continuar.equalsIgnoreCase("si"));
 
-        gimnasio.mostrarResumen();
+        System.out.println("\n=== Registro de Clientes ===");
+        Cliente[] listaClientes = gimnasio.obtenerClientes();
+        for (int i = 0; i < gimnasio.obtenerCantidadClientes(); i++) {
+            System.out.println(listaClientes[i]);
+        }
+
+        System.out.println("\n=== Resumen del Día ===");
+        System.out.println("Clientes que completaron su rutina: " + gimnasio.completaronRutina());
+        System.out.println("Tiempo promedio invertido: " + String.format("%.2f", gimnasio.calcularTiempoPromedio()) + " minutos");
     }
 }
