@@ -29,7 +29,6 @@ public class Parque {
             }
             return true;
         } else {
-            System.out.println("No hay más espacio para nuevos visitantes.");
             return false;
         }
     }
@@ -38,21 +37,18 @@ public class Parque {
         return visitante.edad >= 12 && visitante.altura >= 1.40;
     }
 
-    public void mostrarAccesos() {
+    public String[] obtenerAcceso() {
+        String[] accesos = new String[this.cantidadVisitantes];
         for (int i = 0; i < this.cantidadVisitantes; i++) {
             Visitante v = this.visitantes[i];
-            System.out.println(v);
-            if (puedeAcceder(v)) {
-                System.out.println("Puede acceder a todos los juegos.");
-            } else {
-                System.out.println("No puede acceder a todos los juegos.");
-            }
-            System.out.println(" ");
+            if (puedeAcceder(v)){
+                accesos[i] = v.toString() + "\nPuede acceder a tods los juegos.";
+            }else{
+                accesos[i] = v.toString() + "\nNo puede acceder a todos los juegos.";            }
         }
+        return accesos;
     }
-
-    public void mostrarResumen() {
-        System.out.println("Total de visitantes que cumplen todos los requisitos: " + this.cumpleRequisitos);
+    public int cumpleRequesitos(){
+        return this.cumpleRequisitos;
     }
 }
-

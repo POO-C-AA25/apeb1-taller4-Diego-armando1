@@ -23,13 +23,19 @@ public class Ejecutor {
             Visitante visitante = new Visitante(nombre, edad, altura);
             if (parque.registrarVisitante(visitante)) {
                 System.out.println("Visitante registrado exitosamente.");
+            } else {
+                System.out.println("No hay más espacio para nuevos visitantes.");
             }
+
             System.out.print("¿Desea registrar otro visitante? (si/no): ");
             continuar = tcl.nextLine();
         } while (continuar.equalsIgnoreCase("si"));
+
         System.out.println("\n=== Acceso a Juegos ===");
-        parque.mostrarAccesos();
-        System.out.println("\n=== Resumen del Día ===");
-        parque.mostrarResumen();
+        String[] accesos = parque.obtenerAcceso();
+        for (String acceso : accesos) {
+            System.out.println(acceso);
+            System.out.println();
+        }
     }
 }
